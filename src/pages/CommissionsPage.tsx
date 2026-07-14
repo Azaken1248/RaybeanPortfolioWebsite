@@ -1,42 +1,47 @@
-import { Icon } from "../components/Icon"
 import { usePortfolio } from "../content/usePortfolio"
-import { useContactModal } from "../layout/contactModalContext"
 
 export function CommissionsPage() {
   const { commissions } = usePortfolio()
-  const { open: openContact } = useContactModal()
 
   return (
     <>
-      <header className="pt-4 pb-2 sm:pt-8">
-        <h1 className="font-display text-3xl text-ink sm:text-4xl lg:text-5xl">
-          {commissions.section.title}
-        </h1>
-      </header>
-
-      <section className="mt-8">
-        <div className="rounded-card bg-surface p-7 shadow-soft sm:p-10">
-          <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-ink text-bg">
-              <Icon name="Handshake" size={24} />
-            </span>
-
-            <div className="flex-1">
-              <p className="font-body inline-flex items-center gap-2 rounded-full bg-periwinkle/40 px-3 py-1 text-xs font-bold tracking-wide text-ink uppercase">
-                {commissions.isOpen ? "open" : "closed"}
-              </p>
-              <p className="font-body mt-3 max-w-xl leading-relaxed text-ink/80">
-                {commissions.notice}
-              </p>
+      {/* Narrower than the page container: at full width the image half gets so
+          wide that object-cover crops straight into the character's face. */}
+      <section className="mx-auto mt-6 max-w-5xl sm:mt-16">
+        <div className="grid overflow-hidden rounded-card bg-surface shadow-soft md:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
+          {commissions.image && (
+            <div className="relative min-h-[16rem] overflow-hidden bg-gradient-to-br from-lavender/25 to-periwinkle/25 md:min-h-[23rem] md:border-r md:border-periwinkle/50">
+              <img
+                src={commissions.image}
+                // Decorative: the notice beside it already carries the meaning,
+                // so announcing the art would only add noise for a screen reader.
+                alt={commissions.imageAlt ?? ""}
+                aria-hidden={!commissions.imageAlt}
+                width={681}
+                height={681}
+                loading="eager"
+                // Anchored top so the head survives and the body is what gets
+                // cropped, which is how the reference frames her.
+                className="absolute inset-0 size-full object-cover object-top"
+              />
             </div>
+          )}
 
-            <button
-              type="button"
-              onClick={openContact}
-              className="font-display shrink-0 cursor-pointer rounded-full bg-ink px-6 py-3 text-sm font-bold text-bg transition hover:scale-[1.03]"
-            >
-              contact me!
-            </button>
+          <div className="flex flex-col justify-center gap-5 p-8 sm:p-10 lg:p-12">
+            <h1 className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+              {commissions.heading}
+            </h1>
+
+            <div className="space-y-4">
+              {commissions.body.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="font-body text-sm leading-relaxed text-ink/75"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </section>

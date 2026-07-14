@@ -138,7 +138,13 @@ export type CommissionTier = {
 export type CommissionsContent = {
   section: SectionContent
   isOpen: boolean
-  notice: string
+  /** Headline on the notice card. */
+  heading: string
+  /** Body paragraphs beneath it. */
+  body: string[]
+  /** Art beside the notice. Omit and the card renders text-only. */
+  image?: string
+  imageAlt?: string
   /** Empty today — commissions are closed. Renders automatically once filled. */
   tiers: CommissionTier[]
 }
@@ -181,6 +187,13 @@ export type ContactContent = {
 export type FooterContent = {
   /** "{year}" is substituted at render time. */
   copyright: string
+  tagline?: string
+  /** Who built the site. Omit and nothing renders. */
+  credit?: {
+    prefix: string
+    name: string
+    href?: string
+  }
 }
 
 export type PortfolioData = {

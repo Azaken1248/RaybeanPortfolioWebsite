@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { ContactModal } from "../components/ContactModal"
+import { ScrollToTop } from "../components/ScrollToTop"
 import { usePortfolio } from "../content/usePortfolio"
 import { ContactModalContext } from "./contactModalContext"
 import { SiteFooter } from "./SiteFooter"
@@ -72,6 +73,7 @@ export function SiteLayout() {
 
         <SiteFooter />
 
+        <ScrollToTop />
         <ContactModal isOpen={contactOpen} onClose={closeContact} />
       </div>
     </ContactModalContext.Provider>

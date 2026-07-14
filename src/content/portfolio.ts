@@ -320,10 +320,15 @@ export const defaultPortfolio: PortfolioData = {
   ],
 
   commissions: {
-    section: { title: "Commissions" },
+    section: { title: "commissions" },
     isOpen: false,
-    notice:
-      "My commissions are currently closed! Please contact me personally to know when i reopen them!",
+    heading: "whoops, commissions are currently closed!",
+    body: [
+      "I'm currently not accepting any new commissions. I will be taking the time to finish my current commissions and personal projects, and job seeking.",
+      "Please contact me to know when I reopen commissions!",
+    ],
+    image: "/peeking.webp",
+    imageAlt: "",
     tiers: [],
   },
 
@@ -360,6 +365,13 @@ export const defaultPortfolio: PortfolioData = {
   },
 
   footer: {
-    copyright: "© {year} Raybean",
+    copyright: "© {year} Raybean. All rights reserved.",
+    tagline: "Made with love and insanity.",
+    credit: {
+      prefix: "Website by",
+      name: "Azaken1248",
+      // NEEDS-REAL-VALUE: confirm where this should link.
+      href: "https://github.com/Azaken1248",
+    },
   },
 }

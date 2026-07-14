@@ -127,7 +127,10 @@ export type ApiPortfolioResponse = {
     commissions: {
       section: SectionContent
       isOpen: boolean
-      notice: string
+      heading: string
+      body: string[]
+      imageUrl?: string
+      imageAlt?: string
     }
     commissionTiers: ApiCommissionTier[]
     contactContent: {
@@ -142,6 +145,12 @@ export type ApiPortfolioResponse = {
     }
     footerContent: {
       copyright: string
+      tagline?: string
+      credit?: {
+        prefix: string
+        name: string
+        href?: string
+      }
     }
   }
 }

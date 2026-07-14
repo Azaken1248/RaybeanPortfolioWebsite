@@ -81,7 +81,10 @@ export function mapApiToPortfolio(
     commissions: {
       section: raw.commissions.section,
       isOpen: raw.commissions.isOpen,
-      notice: raw.commissions.notice,
+      heading: raw.commissions.heading,
+      body: [...raw.commissions.body],
+      image: raw.commissions.imageUrl,
+      imageAlt: raw.commissions.imageAlt,
       tiers: [...raw.commissionTiers]
         .sort((a, b) => a.sortOrder - b.sortOrder)
         .map((tier) => ({
