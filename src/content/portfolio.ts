@@ -175,17 +175,6 @@ export const defaultPortfolio: PortfolioData = {
           },
           layout: "carousel",
         },
-        {
-          id: "miscellaneous",
-          section: {
-            title: "miscellaneous",
-            // TODO(ray): this line is my best read of the mock, which was too
-            // small to be sure of. Correct it.
-            description:
-              "I have also worked on other projects, mostly in social media and merchandise design.",
-          },
-          layout: "carousel",
-        },
       ],
     },
     {
