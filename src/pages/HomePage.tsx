@@ -94,7 +94,8 @@ export function HomePage() {
                   rel={cta.external ? "noreferrer noopener" : undefined}
                   className="flex items-center gap-3 rounded-full bg-periwinkle/30 py-2 pr-6 pl-2 transition hover:bg-periwinkle/55"
                 >
-                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-ink text-bg">
+                  {/* Fully rounded to match the pill it sits in. */}
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-bg">
                     <Icon name={cta.icon} size={18} />
                   </span>
                   <span className="font-display text-sm leading-tight font-bold text-ink">
