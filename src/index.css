@@ -15,6 +15,12 @@
 
   --font-display: "Poppins", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, sans-serif;
+
+  /* Elevation. The reference mock uses soft, wide, downward shadows. */
+  --shadow-soft: 0 22px 45px -18px rgb(70 70 70 / 0.18);
+  --shadow-nav: 0 12px 30px -14px rgb(70 70 70 / 0.16);
+
+  --radius-card: 2.25rem;
 }
 
 @layer base {
