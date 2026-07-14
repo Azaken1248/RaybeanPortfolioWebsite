@@ -86,7 +86,8 @@ export type WorkItem = {
 export type WorkGroup = {
   id: string
   section: SectionContent
-  layout: "grid" | "masonry" | "video-grid"
+  /** Chosen per group in content, so a section's presentation is data, not code. */
+  layout: "grid" | "masonry" | "video-grid" | "carousel"
 }
 
 export type DisciplinePage = {

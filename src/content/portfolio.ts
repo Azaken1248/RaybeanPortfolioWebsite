@@ -153,35 +153,27 @@ export const defaultPortfolio: PortfolioData = {
       id: "graphic-design",
       route: "/graphic-design",
       navLabel: "graphic design",
-      section: { title: "Graphic Design" },
+      section: { title: "graphic design" },
       toolsNote:
-        "I mainly use Adobe Photoshop, Figma and Affinity for graphic designing, unless mentioned otherwise.",
+        "I mainly use **Adobe Photoshop, Figma and Affinity** for graphic designing, unless mentioned otherwise.",
       groups: [
-        {
-          id: "featured-gfx",
-          section: {
-            title: "Featured GFX Works?",
-            description: "Some of my favourite projects!",
-          },
-          layout: "grid",
-        },
         {
           id: "osu-projects",
           section: {
-            title: "projects made for osu!",
+            title: "osu! projects",
             description:
-              "These are projects made for the osu! community. You may also recognise some of these from the osu! World Cups.",
+              "I am a part of the osu! World Cup Design Team, responsible for creating the visuals for all osu! originals featured in World Cups.",
           },
-          layout: "grid",
+          layout: "carousel",
         },
         {
-          id: "social-official",
+          id: "community-projects",
           section: {
-            title: "social media/official works",
+            title: "community projects",
             description:
-              "I've also worked on projects outside osu! mostly in social media.",
+              "These are some of the projects I've worked on for various osu! tournaments outside the World Cups. This was how I got my foot in the door with graphic design, back in 2023!",
           },
-          layout: "grid",
+          layout: "carousel",
         },
       ],
     },
@@ -190,7 +182,7 @@ export const defaultPortfolio: PortfolioData = {
       route: "/illustration",
       navLabel: "illustration",
       section: {
-        title: "Illustration",
+        title: "illustration",
         description: "A small collection of my best works!",
       },
       // One group, no heading of its own — the page description covers it.
@@ -200,7 +192,7 @@ export const defaultPortfolio: PortfolioData = {
       id: "video",
       route: "/video",
       navLabel: "videos & storyboards",
-      section: { title: "Video & osu! Storyboards" },
+      section: { title: "videos & storyboards" },
       groups: [
         {
           id: "videos",
@@ -255,7 +247,7 @@ export const defaultPortfolio: PortfolioData = {
       title: "Vacant Rhapsody",
       tags: ["Graphic Design"],
       discipline: "graphic-design",
-      group: "featured-gfx",
+      group: "osu-projects",
       medium: "image",
       image: "/works/vacant-rhapsody.webp",
       alt: "Vacant Rhapsody — a moonlit night sky over a lone flower",
@@ -268,7 +260,7 @@ export const defaultPortfolio: PortfolioData = {
       title: "Anomaly Maria",
       tags: ["Typography"],
       discipline: "graphic-design",
-      group: "featured-gfx",
+      group: "osu-projects",
       medium: "image",
       image: "/works/anomaly-maria.webp",
       alt: "Anomaly Maria — typography over a red-haired character among roses",
@@ -294,7 +286,7 @@ export const defaultPortfolio: PortfolioData = {
       title: "Out of Place",
       tags: ["Illustration", "Graphic Design"],
       discipline: "graphic-design",
-      group: "featured-gfx",
+      group: "osu-projects",
       medium: "image",
       image: "/works/out-of-place.webp",
       alt: "Out of Place — bold lettering over flowing ribbons of colour",
