@@ -61,6 +61,8 @@ export type SectionContent = {
 
 export type WorkItem = {
   id: string
+  /** The track/song the work was made for, where there is one. */
+  artist?: string
   title: string
   discipline: DisciplineId
   /** Id of the WorkGroup this belongs to, within its discipline. */

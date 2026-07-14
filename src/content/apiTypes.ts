@@ -78,6 +78,7 @@ export type ApiDiscipline = Timestamped & {
 
 export type ApiWork = Timestamped & {
   id: string
+  artist?: string
   title: string
   discipline: DisciplineId
   group: string

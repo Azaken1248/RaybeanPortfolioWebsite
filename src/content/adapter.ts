@@ -62,6 +62,7 @@ export function mapApiToPortfolio(
 
     works: raw.works.map((work) => ({
       id: work.id,
+      artist: work.artist,
       title: work.title,
       discipline: work.discipline,
       group: work.group,
