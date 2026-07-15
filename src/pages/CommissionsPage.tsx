@@ -5,12 +5,21 @@ export function CommissionsPage() {
 
   return (
     <>
-      {/* Narrower than the page container: at full width the image half gets so
-          wide that object-cover crops straight into the character's face. */}
       <section className="mx-auto mt-6 max-w-5xl sm:mt-16">
-        <div className="grid overflow-hidden rounded-card bg-surface shadow-soft md:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
+        {/*
+          Two genuinely different layouts, not one that reflows. The sticker is
+          drawn peeking in from the left with transparent space around her, so
+          she must be shown whole (object-contain, never cropped or zoomed).
+
+          - md and up: a side-by-side split, she stands in the left panel.
+          - below md: she peeks up from the BOTTOM of the card. Stacking the
+            square sticker on top of the text left an awkward gap and dead space;
+            peeking from the bottom edge keeps her charm and needs no tall image
+            block. The text reserves room for her with padding-bottom.
+        */}
+        <div className="relative overflow-hidden rounded-card bg-surface shadow-soft md:grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
           {commissions.image && (
-            <div className="relative min-h-[16rem] overflow-hidden bg-gradient-to-br from-lavender/25 to-periwinkle/25 md:min-h-[23rem] md:border-r md:border-periwinkle/50">
+            <div className="pointer-events-none absolute right-0 bottom-0 flex items-end md:relative md:inset-auto md:min-h-[24rem] md:w-full md:justify-end md:bg-gradient-to-br md:from-lavender/25 md:to-periwinkle/20">
               <img
                 src={commissions.image}
                 // Decorative: the notice beside it already carries the meaning,
@@ -20,14 +29,16 @@ export function CommissionsPage() {
                 width={681}
                 height={681}
                 loading="eager"
-                // Anchored top so the head survives and the body is what gets
-                // cropped, which is how the reference frames her.
-                className="absolute inset-0 size-full object-cover object-top"
+                // Below md she peeks from the bottom-right, mirrored so her drawn
+                // hard edge (she is cut on the right for the desktop divider)
+                // lines up with the card's right edge and she faces inward. From
+                // md up she stands upright in the split panel, unflipped.
+                className="h-36 w-auto max-w-none -scale-x-100 object-contain object-bottom md:h-full md:max-h-[24rem] md:w-full md:scale-x-100"
               />
             </div>
           )}
 
-          <div className="flex flex-col justify-center gap-5 p-8 sm:p-10 lg:p-12">
+          <div className="relative flex flex-col justify-center gap-5 p-8 pb-40 sm:p-10 sm:pb-44 md:p-10 md:pb-10 lg:p-12 lg:pb-12">
             <h1 className="font-display text-2xl leading-snug text-ink sm:text-3xl">
               {commissions.heading}
             </h1>
