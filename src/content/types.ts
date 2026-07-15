@@ -162,6 +162,8 @@ export type ContactMethod = {
   value: string
   href?: string
   icon: string
+  /** Brand colour for the icon, matching the home page social row. */
+  color?: string
 }
 
 export type ContactFormField = {

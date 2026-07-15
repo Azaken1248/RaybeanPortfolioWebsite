@@ -1,7 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
 import { usePortfolio } from "../content/usePortfolio"
 import { Icon } from "./Icon"
+
+/** Same brand-tint treatment as the home page social row. */
+const brandStyle = (color?: string) =>
+  color ? ({ "--brand": color } as CSSProperties) : undefined
+const brandedIcon =
+  "bg-[color-mix(in_srgb,var(--brand)_15%,transparent)] text-[var(--brand)]"
 
 type ContactModalProps = {
   isOpen: boolean
@@ -136,7 +142,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="rounded-2xl bg-bg p-4 transition hover:bg-periwinkle/25"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-ink text-bg">
+                      <span
+                        style={brandStyle(method.color)}
+                        className={`grid size-10 shrink-0 place-items-center rounded-xl ${
+                          method.color ? brandedIcon : "bg-ink text-bg"
+                        }`}
+                      >
                         <Icon name={method.icon} size={20} />
                       </span>
 
@@ -199,7 +210,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         rel="noreferrer noopener"
                         aria-label={social.label}
                         title={social.label}
-                        className="grid size-11 place-items-center rounded-full bg-lavender/30 text-ink transition hover:bg-ink hover:text-bg"
+                        style={brandStyle(social.color)}
+                        className={`grid size-11 place-items-center rounded-full transition duration-200 hover:scale-110 ${
+                          social.color
+                            ? brandedIcon
+                            : "bg-lavender/30 text-ink hover:bg-ink hover:text-bg"
+                        }`}
                       >
                         <Icon name={social.icon} size={20} />
                       </a>

@@ -59,6 +59,7 @@ const phosphor: Record<string, Icon> = {
 
 /** Symbol ids present in public/icons.svg. */
 const sprite = new Set([
+  "discord",
   "bluesky",
   "osu",
   "resume",

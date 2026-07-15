@@ -34,7 +34,7 @@ export const defaultPortfolio: PortfolioData = {
       label: "Discord",
       handle: "raybeanosu",
       // No public profile URL — this opens the contact modal instead.
-      icon: "DiscordLogo",
+      icon: "discord",
       color: "#5865F2", // Discord blurple
       showInHero: true,
       showInFooter: true,
@@ -1079,7 +1079,8 @@ export const defaultPortfolio: PortfolioData = {
         kind: "discord",
         label: "Discord",
         value: "raybeanosu",
-        icon: "DiscordLogo",
+        icon: "discord",
+        color: "#5865F2",
       },
       {
         id: "email-osu",
@@ -1089,15 +1090,17 @@ export const defaultPortfolio: PortfolioData = {
         value: "raybeanosutourney@gmail.com",
         href: "mailto:raybeanosutourney@gmail.com",
         icon: "EnvelopeSimple",
+        color: "#C08A2E",
       },
       {
         id: "email-general",
         kind: "email",
         label: "Email",
         note: "for non-osu! enquiries",
-        value: "shreyadas234@gmail.com",
-        href: "mailto:shreyadas234@gmail.com",
+        value: "hireraybean@gmail.com",
+        href: "mailto:hireraybean@gmail.com",
         icon: "EnvelopeSimple",
+        color: "#C08A2E",
       },
     ],
     // form is intentionally absent — it belongs to the message-bot phase.

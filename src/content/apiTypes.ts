@@ -111,6 +111,7 @@ export type ApiContactMethod = {
   value: string
   href?: string
   icon: string
+  color?: string
 }
 
 export type ApiPortfolioResponse = {
