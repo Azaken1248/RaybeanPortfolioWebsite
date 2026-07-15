@@ -7,19 +7,14 @@ export function CommissionsPage() {
     <>
       <section className="mx-auto mt-6 max-w-5xl sm:mt-16">
         {/*
-          Two genuinely different layouts, not one that reflows. The sticker is
-          drawn peeking in from the left with transparent space around her, so
-          she must be shown whole (object-contain, never cropped or zoomed).
-
-          - md and up: a side-by-side split, she stands in the left panel.
-          - below md: she peeks up from the BOTTOM of the card. Stacking the
-            square sticker on top of the text left an awkward gap and dead space;
-            peeking from the bottom edge keeps her charm and needs no tall image
-            block. The text reserves room for her with padding-bottom.
+          The sticker is a desktop-only flourish. It is drawn peeking in from
+          the left with a hard right edge meant to meet a divider, which only
+          works in the side-by-side split — so below md it is hidden and the
+          notice stands on its own as plain text.
         */}
-        <div className="relative overflow-hidden rounded-card bg-surface shadow-soft md:grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
+        <div className="overflow-hidden rounded-card bg-surface shadow-soft md:grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
           {commissions.image && (
-            <div className="pointer-events-none absolute right-0 bottom-0 flex items-end md:relative md:inset-auto md:min-h-[24rem] md:w-full md:justify-end md:bg-gradient-to-br md:from-lavender/25 md:to-periwinkle/20">
+            <div className="hidden md:flex md:min-h-[24rem] md:w-full md:items-end md:justify-end md:bg-gradient-to-br md:from-lavender/25 md:to-periwinkle/20">
               <img
                 src={commissions.image}
                 // Decorative: the notice beside it already carries the meaning,
@@ -29,16 +24,13 @@ export function CommissionsPage() {
                 width={681}
                 height={681}
                 loading="eager"
-                // Below md she peeks from the bottom-right, mirrored so her drawn
-                // hard edge (she is cut on the right for the desktop divider)
-                // lines up with the card's right edge and she faces inward. From
-                // md up she stands upright in the split panel, unflipped.
-                className="h-36 w-auto max-w-none -scale-x-100 object-contain object-bottom md:h-full md:max-h-[24rem] md:w-full md:scale-x-100 md:object-right-bottom"
+                // Anchored right so her drawn hard edge lines up with the divider.
+                className="h-full max-h-[24rem] w-full object-contain object-right-bottom"
               />
             </div>
           )}
 
-          <div className="relative flex flex-col justify-center gap-5 p-8 pb-40 sm:p-10 sm:pb-44 md:p-10 md:pb-10 lg:p-12 lg:pb-12">
+          <div className="flex flex-col justify-center gap-5 p-8 sm:p-10 md:p-10 lg:p-12">
             <h1 className="font-display text-2xl leading-snug text-ink sm:text-3xl">
               {commissions.heading}
             </h1>
