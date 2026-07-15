@@ -1,25 +1,50 @@
 import type { WorkItem } from "../content/types"
+import { Icon } from "./Icon"
 import { WorkImage } from "./WorkImage"
 
 type WorkCardProps = {
   work: WorkItem
+  /** "video" forces a 16:9 frame; "natural" lets the image keep its own ratio
+   *  (used by the illustration masonry). */
+  aspect?: "video" | "natural"
 }
 
 /**
  * A single work tile with its caption.
  *
  * `work.image` is only ever a URL string, so this renders a local file or a
- * remote CDN URL with no branching. A failed load (missing file, dead CDN link)
- * falls back to the palette gradient behind it rather than a broken-image icon.
+ * remote CDN URL with no branching. A failed load falls back to the palette
+ * gradient behind it rather than a broken-image icon.
+ *
+ * Video and storyboard works get a play badge and open their embed; everything
+ * else opens its `href` when it has one.
  */
-export function WorkCard({ work }: WorkCardProps) {
+export function WorkCard({ work, aspect = "video" }: WorkCardProps) {
+  const isVideo = work.medium === "video" || work.medium === "storyboard"
+  const href = work.embedUrl ?? work.href
+  const natural = aspect === "natural"
+
   const body = (
     <>
-      <div className="relative aspect-video w-full overflow-hidden rounded-card bg-gradient-to-br from-lavender/40 to-periwinkle/40 shadow-nav transition duration-300 group-hover:-translate-y-1 group-hover:shadow-soft">
+      <div
+        className={`relative w-full overflow-hidden rounded-card bg-gradient-to-br from-lavender/40 to-periwinkle/40 shadow-nav transition duration-300 group-hover:-translate-y-1 group-hover:shadow-soft ${
+          natural ? "" : "aspect-video"
+        }`}
+      >
         <WorkImage
-            work={work}
-            className="size-full object-cover transition duration-500 group-hover:scale-[1.04]"
-          />
+          work={work}
+          className={`transition duration-500 group-hover:scale-[1.04] ${
+            natural ? "h-auto w-full" : "size-full object-cover"
+          }`}
+        />
+
+        {isVideo && (
+          <span className="pointer-events-none absolute inset-0 grid place-items-center">
+            <span className="grid size-14 place-items-center rounded-full bg-ink/70 text-bg backdrop-blur-sm transition duration-300 group-hover:scale-110 group-hover:bg-ink">
+              <Icon name="Play" size={24} weight="fill" className="ml-0.5" />
+            </span>
+          </span>
+        )}
       </div>
 
       <div className="mt-4 px-1">
@@ -48,10 +73,10 @@ export function WorkCard({ work }: WorkCardProps) {
     </>
   )
 
-  if (work.href) {
+  if (href) {
     return (
       <a
-        href={work.href}
+        href={href}
         target="_blank"
         rel="noreferrer noopener"
         className="group block"

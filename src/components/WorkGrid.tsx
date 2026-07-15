@@ -11,19 +11,28 @@ type WorkGridProps = {
   className?: string
 }
 
-// Illustration wants three narrower columns; everything else reads better as
-// two wide 16:9 tiles, which is how the reference lays out Featured Works.
-const COLUMNS: Record<GridLayout, string> = {
-  grid: "sm:grid-cols-2",
-  "video-grid": "sm:grid-cols-2",
-  masonry: "sm:grid-cols-2 lg:grid-cols-3",
-}
-
 export function WorkGrid({ works, layout = "grid", className }: WorkGridProps) {
   if (works.length === 0) return null
 
+  // Masonry uses CSS columns so illustrations of different heights pack
+  // together at their natural aspect ratio, rather than being cropped to a
+  // shared 16:9. The grids stay a plain two-up of uniform tiles.
+  if (layout === "masonry") {
+    return (
+      <ul
+        className={`columns-1 gap-5 sm:columns-2 sm:gap-6 lg:columns-3 ${className ?? ""}`}
+      >
+        {works.map((work) => (
+          <li key={work.id} className="mb-5 break-inside-avoid sm:mb-6">
+            <WorkCard work={work} aspect="natural" />
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   return (
-    <ul className={`grid gap-5 sm:gap-6 ${COLUMNS[layout]} ${className ?? ""}`}>
+    <ul className={`grid gap-5 sm:grid-cols-2 sm:gap-6 ${className ?? ""}`}>
       {works.map((work) => (
         <li key={work.id}>
           <WorkCard work={work} />
