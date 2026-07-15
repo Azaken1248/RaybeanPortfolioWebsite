@@ -46,15 +46,19 @@ export function SiteLayout() {
   return (
     <ContactModalContext.Provider value={contactValue}>
       <div className="relative isolate min-h-screen bg-bg text-ink">
-        {/* Soft blooms. Subtle enough to keep the flat, clean feel of the mock. */}
+        {/*
+          Soft blooms. The wrapper is fixed to the viewport and clips its own
+          overflow, so the blobs — which sit at negative offsets past the edges —
+          can never widen the page and trigger a horizontal scrollbar. Clipping
+          the blobs here rather than the whole page keeps the fix local.
+        */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed -top-32 -left-32 -z-10 size-[28rem] rounded-full bg-lavender/25 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed top-1/3 -right-40 -z-10 size-[32rem] rounded-full bg-periwinkle/25 blur-3xl"
-        />
+          className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+        >
+          <div className="absolute -top-32 -left-32 size-[28rem] rounded-full bg-lavender/25 blur-3xl" />
+          <div className="absolute top-1/3 -right-40 size-[32rem] rounded-full bg-periwinkle/25 blur-3xl" />
+        </div>
 
         <SiteNav />
 
