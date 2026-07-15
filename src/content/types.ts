@@ -17,6 +17,22 @@ export type SiteConfig = {
   /** Points at a PDF today; later this can point at a dedicated resume site. */
   resumeUrl: string
   resumeLabel: string
+  /**
+   * Social-embed (Open Graph / Twitter card) config. These are baked into the
+   * served HTML at build time so link-preview crawlers, which do not run JS,
+   * can read them. See vite.config.ts.
+   */
+  seo: {
+    /** Canonical absolute site URL, e.g. https://portfolio.raybean.cc */
+    url: string
+    /** Absolute or root-relative preview image (1200x630 works best). */
+    ogImage: string
+    ogImageAlt: string
+    /** Browser UI tint, and the OG type. */
+    themeColor: string
+    /** e.g. "@raybeanosu" — omit for a plain summary card. */
+    twitterHandle?: string
+  }
 }
 
 export type SocialLink = {

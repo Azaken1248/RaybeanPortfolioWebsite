@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--
-      Two marks on purpose. Ray's chibi is line art, and its strokes fall below
-      a pixel when scaled to a 32px tab, where it turns to grey mush. So the tab
-      gets a Poppins "R" matching the wordmark, and the full chibi is kept for
-      the 180px home-screen icon, where it reads perfectly.
+      Theme-aware favicon: the plain mark on the light tab bars most browsers
+      use, the inverted mark on dark ones. The default (no media) covers
+      browsers that ignore the media attribute.
     -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon-32-inverted.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon-32.png"
+      media="(prefers-color-scheme: dark)"
+    />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,7 +31,8 @@
       rel="stylesheet"
     />
 
-    <title>Raybean — Graphic Designer &amp; Illustrator</title>
+    <!-- Social-embed + title tags are baked in here from portfolio.ts by vite.config.ts -->
+    <!--seo-->
   </head>
   <body>
     <div id="root"></div>

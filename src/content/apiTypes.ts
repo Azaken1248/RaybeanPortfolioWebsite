@@ -25,6 +25,13 @@ export type ApiSiteConfig = {
   metaDescription: string
   resumeUrl: string
   resumeLabel: string
+  seo: {
+    url: string
+    ogImage: string
+    ogImageAlt: string
+    themeColor: string
+    twitterHandle?: string
+  }
 }
 
 export type ApiNavItem = {

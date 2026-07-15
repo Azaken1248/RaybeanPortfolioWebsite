@@ -1,4 +1,4 @@
-import type { PortfolioData } from "./types"
+import type { PortfolioData } from "./types.js"
 
 /**
  * The hardcoded content — today's single source of truth.
@@ -15,9 +15,15 @@ export const defaultPortfolio: PortfolioData = {
     pageTitle: "Raybean — Graphic Designer & Illustrator",
     metaDescription:
       "Raybean (Ray) — graphic designer, illustrator and video editor. Portfolio of graphic design, illustration, video and osu! storyboard work.",
-    // NEEDS-REAL-VALUE: drop the PDF into public/ and this link works.
     resumeUrl: "/raybean-resume.pdf",
     resumeLabel: "click me for my resume!",
+    seo: {
+      url: "https://portfolio.raybean.cc",
+      ogImage: "/og-image.jpg",
+      ogImageAlt: "Raybean — graphic designer and illustrator",
+      themeColor: "#B2ABC0",
+      twitterHandle: "@raybeanosu",
+    },
   },
 
   // No "home" entry — the Raybean logo is the link home, as in the reference.
