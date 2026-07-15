@@ -22,8 +22,11 @@ export function WorkImage({ work, className }: WorkImageProps) {
     <img
       src={work.image}
       alt={work.alt}
-      width={1600}
-      height={900}
+      // Real dimensions where known, so the browser reserves the right space and
+      // does not coerce the image into a 16:9 aspect ratio. Grid cards use
+      // object-cover so their ratio comes from the frame regardless.
+      width={work.width}
+      height={work.height}
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}

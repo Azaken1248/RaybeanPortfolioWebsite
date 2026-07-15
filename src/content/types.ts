@@ -71,6 +71,10 @@ export type WorkItem = {
   description?: string
   /** Empty string renders a styled placeholder tile. Set it to swap in real art. */
   image: string
+  /** Natural pixel dimensions, so the image reserves correct space and the
+   *  masonry keeps portraits portrait instead of forcing a 16:9 ratio. */
+  width?: number
+  height?: number
   alt: string
   /** Outbound link — a Pixiv post, a beatmap page, a tournament page. */
   href?: string

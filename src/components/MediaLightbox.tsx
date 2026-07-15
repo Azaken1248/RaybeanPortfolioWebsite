@@ -79,7 +79,7 @@ export function MediaLightbox({ media, onClose }: MediaLightboxProps) {
             role="dialog"
             aria-modal="true"
             aria-label={media.title}
-            className="relative flex max-h-full w-full max-w-5xl flex-col items-center"
+            className="relative flex w-auto max-w-full flex-col items-center"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
@@ -98,10 +98,15 @@ export function MediaLightbox({ media, onClose }: MediaLightboxProps) {
               <img
                 src={media.src}
                 alt={media.alt}
-                className="max-h-[85vh] w-auto max-w-full rounded-2xl object-contain shadow-soft"
+                // Fits inside the viewport by whichever runs out first, width or
+                // height, so tall portraits are not cut off on short screens.
+                className="max-h-[82vh] w-auto max-w-[92vw] rounded-2xl object-contain shadow-soft"
               />
             ) : embedUrl ? (
-              <div className="aspect-video w-full overflow-hidden rounded-2xl bg-ink shadow-soft">
+              // 16:9, capped so its height never exceeds the viewport: at
+              // 82vh tall a 16:9 box is 82*16/9 ≈ 146vh wide, so the width cap
+              // is min(92vw, 146vh) and aspect-video sets the height from it.
+              <div className="aspect-video w-[min(92vw,146vh)] max-w-5xl overflow-hidden rounded-2xl bg-ink shadow-soft">
                 <iframe
                   src={embedUrl}
                   title={media.title}
@@ -112,7 +117,7 @@ export function MediaLightbox({ media, onClose }: MediaLightboxProps) {
               </div>
             ) : null}
 
-            <p className="font-display mt-4 max-w-full truncate text-center text-sm font-bold text-bg">
+            <p className="font-display mt-4 max-w-[92vw] truncate text-center text-sm font-bold text-bg">
               {media.artist && (
                 <span className="font-semibold text-bg/60">
                   {media.artist} -{" "}
