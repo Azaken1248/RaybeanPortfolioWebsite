@@ -166,10 +166,16 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
                   <div className="pointer-events-none absolute inset-1.5 rounded-[1.7rem] border border-dashed border-lavender/50" />
                   <div className="pointer-events-none absolute -top-1.5 left-1/2 h-4 w-16 -translate-x-1/2 -rotate-2 border-x border-lavender/40 bg-periwinkle/60 opacity-90" />
 
-                  <div className="relative aspect-video overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-lavender/40 to-periwinkle/40">
+                  {/*
+                    object-contain, not cover: these are banners, square logos
+                    and portrait merch shots, so cropping them all to 16:9 clips
+                    them badly. The whole design shows, letterboxed on a neutral
+                    frame (the gradient looked messy behind product photos).
+                  */}
+                  <div className="relative aspect-video overflow-hidden rounded-[1.5rem] bg-bg">
                     <WorkImage
                       work={work}
-                      className="pointer-events-none size-full object-cover transition duration-700 group-hover:scale-105"
+                      className="pointer-events-none size-full object-contain transition duration-700 group-hover:scale-105"
                     />
                   </div>
 
