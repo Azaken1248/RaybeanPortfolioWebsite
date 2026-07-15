@@ -33,7 +33,7 @@ export function CommissionsPage() {
                 // hard edge (she is cut on the right for the desktop divider)
                 // lines up with the card's right edge and she faces inward. From
                 // md up she stands upright in the split panel, unflipped.
-                className="h-36 w-auto max-w-none -scale-x-100 object-contain object-bottom md:h-full md:max-h-[24rem] md:w-full md:scale-x-100"
+                className="h-36 w-auto max-w-none -scale-x-100 object-contain object-bottom md:h-full md:max-h-[24rem] md:w-full md:scale-x-100 md:object-right-bottom"
               />
             </div>
           )}
