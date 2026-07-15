@@ -1,5 +1,7 @@
 import type { WorkItem } from "../content/types"
+import { useLightbox } from "../layout/lightboxContext"
 import { Icon } from "./Icon"
+import { lightboxFor } from "./mediaLightboxTypes"
 import { WorkImage } from "./WorkImage"
 
 type WorkCardProps = {
@@ -12,17 +14,19 @@ type WorkCardProps = {
 /**
  * A single work tile with its caption.
  *
- * `work.image` is only ever a URL string, so this renders a local file or a
- * remote CDN URL with no branching. A failed load falls back to the palette
- * gradient behind it rather than a broken-image icon.
+ * Clicking opens the media lightbox: a video plays inline, an illustration or
+ * design opens full-size. A work with only an external `href` and nothing to
+ * show in the lightbox links out instead.
  *
- * Video and storyboard works get a play badge and open their embed; everything
- * else opens its `href` when it has one.
+ * `work.image` is only ever a URL string, so this renders a local file or a
+ * remote CDN URL with no branching, and a failed load falls back to the palette
+ * gradient rather than a broken-image icon.
  */
 export function WorkCard({ work, aspect = "video" }: WorkCardProps) {
+  const { open } = useLightbox()
   const isVideo = work.medium === "video" || work.medium === "storyboard"
-  const href = work.embedUrl ?? work.href
   const natural = aspect === "natural"
+  const media = lightboxFor(work)
 
   const body = (
     <>
@@ -47,7 +51,7 @@ export function WorkCard({ work, aspect = "video" }: WorkCardProps) {
         )}
       </div>
 
-      <div className="mt-4 px-1">
+      <div className="mt-4 px-1 text-left">
         <p className="font-display text-sm font-bold text-ink sm:text-base">
           {work.artist && (
             <span className="font-semibold text-ink/55">{work.artist} - </span>
@@ -73,10 +77,22 @@ export function WorkCard({ work, aspect = "video" }: WorkCardProps) {
     </>
   )
 
-  if (href) {
+  if (media) {
+    return (
+      <button
+        type="button"
+        onClick={() => open(media)}
+        className="group block w-full cursor-pointer"
+      >
+        {body}
+      </button>
+    )
+  }
+
+  if (work.href) {
     return (
       <a
-        href={href}
+        href={work.href}
         target="_blank"
         rel="noreferrer noopener"
         className="group block"

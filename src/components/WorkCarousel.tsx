@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { WorkItem } from "../content/types"
+import { useLightbox } from "../layout/lightboxContext"
 import { Icon } from "./Icon"
+import { lightboxFor } from "./mediaLightboxTypes"
 import { WorkImage } from "./WorkImage"
 
 type WorkCarouselProps = {
@@ -46,8 +48,12 @@ function CarouselArrow({ direction, onClick, disabled }: CarouselArrowProps) {
  * immediately. The arrows opt into smoothness per-call instead.
  */
 export function WorkCarousel({ works }: WorkCarouselProps) {
+  const { open } = useLightbox()
   const scroller = useRef<HTMLUListElement>(null)
   const drag = useRef({ active: false, startX: 0, startScroll: 0 })
+  // Set once a pointer-drag moves past a few pixels, so the click that ends a
+  // drag does not also open a card's lightbox.
+  const didDrag = useRef(false)
   const [dragging, setDragging] = useState(false)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
@@ -84,6 +90,7 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
       startX: event.clientX,
       startScroll: el.scrollLeft,
     }
+    didDrag.current = false
     setDragging(true)
   }
 
@@ -92,8 +99,20 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
     const el = scroller.current
     if (!el) return
     event.preventDefault()
+    if (Math.abs(event.clientX - drag.current.startX) > 6) {
+      didDrag.current = true
+    }
     el.scrollLeft =
       drag.current.startScroll - (event.clientX - drag.current.startX)
+  }
+
+  // Runs in the capture phase, before a card's own click handler, so a click
+  // that merely ended a drag is swallowed instead of opening the lightbox.
+  const onClickCapture = (event: React.MouseEvent) => {
+    if (didDrag.current) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
   }
 
   const endDrag = () => {
@@ -120,6 +139,7 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
+          onClickCapture={onClickCapture}
           className={`no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto px-2 py-8 ${
             dragging ? "cursor-grabbing select-none" : "cursor-grab"
           }`}
@@ -135,8 +155,13 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
                 key={work.id}
                 className="w-[16rem] shrink-0 snap-center sm:w-[20rem] lg:w-[23rem]"
               >
-                <article
-                  className={`group relative rounded-[2rem] border border-periwinkle/50 bg-surface p-3 shadow-nav transition-all duration-500 hover:rotate-0 hover:scale-[1.02] hover:shadow-soft ${tilt}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const media = lightboxFor(work)
+                    if (media) open(media)
+                  }}
+                  className={`group relative block w-full cursor-pointer rounded-[2rem] border border-periwinkle/50 bg-surface p-3 text-left shadow-nav transition-all duration-500 hover:rotate-0 hover:scale-[1.02] hover:shadow-soft ${tilt}`}
                 >
                   <div className="pointer-events-none absolute inset-1.5 rounded-[1.7rem] border border-dashed border-lavender/50" />
                   <div className="pointer-events-none absolute -top-1.5 left-1/2 h-4 w-16 -translate-x-1/2 -rotate-2 border-x border-lavender/40 bg-periwinkle/60 opacity-90" />
@@ -178,7 +203,7 @@ export function WorkCarousel({ works }: WorkCarouselProps) {
                       </ul>
                     )}
                   </div>
-                </article>
+                </button>
               </li>
             )
           })}
