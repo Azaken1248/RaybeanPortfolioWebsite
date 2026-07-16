@@ -35,7 +35,17 @@ export function Icon({
 
   if (source === "phosphor") {
     const phosphorIcon = resolvePhosphorIcon(id)
-    if (!phosphorIcon) return null
+    if (!phosphorIcon) {
+      // Rendering nothing is right in production, but in dev it is how a
+      // mistyped or unregistered name disappears without a trace — which is
+      // exactly how every sprite mark once went missing site-wide.
+      if (import.meta.env.DEV) {
+        console.warn(
+          `[Icon] "${name}" resolved to no icon. If it is a custom mark, add it to the sprite set in iconRegistry.ts; if it is Phosphor, register the component there.`,
+        )
+      }
+      return null
+    }
     return createElement(phosphorIcon, { size, weight, className })
   }
 

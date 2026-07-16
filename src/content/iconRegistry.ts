@@ -57,6 +57,17 @@ const phosphor: Record<string, Icon> = {
   YoutubeLogo: YoutubeLogoIcon,
 }
 
+/** Symbol ids present in public/icons.svg. */
+const sprite = new Set([
+  "discord",
+  "bluesky",
+  "osu",
+  "resume",
+  "chevron-down",
+  "pixiv",
+  "vgen",
+])
+
 /**
  * Icon names carry their source as a prefix, so the admin can pick from several
  * sets and this resolves them without knowing the picker exists:
@@ -78,6 +89,10 @@ export function parseIconName(name: string): { source: IconSource; id: string } 
       return { source: prefix, id: name.slice(idx + 1) }
     }
   }
+  // Unprefixed names predate the scheme and are still all over content
+  // ("osu", "resume", "discord"). The sprite has to be consulted before
+  // falling back to Phosphor, or every custom mark resolves to nothing.
+  if (sprite.has(name)) return { source: "sprite", id: name }
   return { source: "phosphor", id: name }
 }
 
@@ -100,17 +115,6 @@ export function simpleIconUrl(slug: string, color?: string): string {
   const tint = color?.replace("#", "")
   return `https://cdn.simpleicons.org/${slug}${tint ? `/${tint}` : ""}`
 }
-
-/** Symbol ids present in public/icons.svg. */
-const sprite = new Set([
-  "discord",
-  "bluesky",
-  "osu",
-  "resume",
-  "chevron-down",
-  "pixiv",
-  "vgen",
-])
 
 export function resolvePhosphorIcon(name: string | undefined): Icon | undefined {
   if (!name) return undefined
