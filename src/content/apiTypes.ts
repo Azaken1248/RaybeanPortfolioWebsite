@@ -19,12 +19,25 @@ type Timestamped = {
   updatedAt: string
 }
 
+export type ApiSiteTheme = {
+  colors: {
+    bg: string
+    surface: string
+    ink: string
+    lavender: string
+    periwinkle: string
+    cream: string
+  }
+  fonts: { display: string; body: string }
+}
+
 export type ApiSiteConfig = {
   siteName: string
   pageTitle: string
   metaDescription: string
   resumeUrl: string
   resumeLabel: string
+  theme?: ApiSiteTheme
   seo: {
     url: string
     ogImage: string

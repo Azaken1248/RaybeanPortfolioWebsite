@@ -10,6 +10,37 @@ export type DisciplineId = "graphic-design" | "illustration" | "video"
 
 export type WorkMedium = "image" | "video" | "storyboard"
 
+/**
+ * The site's palette and type, as data.
+ *
+ * These were CSS tokens in index.css. They still are — index.css holds the
+ * defaults, and this overrides them at runtime by setting the same custom
+ * properties on :root. So the site renders correctly before any of this loads,
+ * and the admin can retheme it without a deploy.
+ */
+export type SiteTheme = {
+  colors: {
+    /** Page background. */
+    bg: string
+    /** Cards and raised containers. */
+    surface: string
+    /** Body text, headings, the dark button. */
+    ink: string
+    /** Primary accent. Surfaces and borders only — never text. */
+    lavender: string
+    /** Secondary accent. Tinted surfaces that carry text. */
+    periwinkle: string
+    /** Optional warm accent. */
+    cream: string
+  }
+  fonts: {
+    /** Headings and the wordmark. */
+    display: string
+    /** Body copy and UI. */
+    body: string
+  }
+}
+
 export type SiteConfig = {
   siteName: string
   pageTitle: string
@@ -33,6 +64,8 @@ export type SiteConfig = {
     /** e.g. "@raybeanosu" — omit for a plain summary card. */
     twitterHandle?: string
   }
+  /** Omit to use the defaults compiled into index.css. */
+  theme?: SiteTheme
 }
 
 export type SocialLink = {

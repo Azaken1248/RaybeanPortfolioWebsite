@@ -5,6 +5,7 @@ import { ContactModal } from "../components/ContactModal"
 import { MediaLightbox } from "../components/MediaLightbox"
 import type { LightboxMedia } from "../components/mediaLightboxTypes"
 import { ScrollToTop } from "../components/ScrollToTop"
+import { applyTheme } from "../content/theme"
 import { usePortfolio } from "../content/usePortfolio"
 import { ContactModalContext } from "./contactModalContext"
 import { LightboxContext } from "./lightboxContext"
@@ -49,6 +50,12 @@ export function SiteLayout() {
   useEffect(() => {
     document.title = site.pageTitle
   }, [site.pageTitle])
+
+  // Palette and fonts are content. index.css holds the defaults, so the site is
+  // correct before this runs; this only overrides when a theme is configured.
+  useEffect(() => {
+    applyTheme(site.theme)
+  }, [site.theme])
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" })
