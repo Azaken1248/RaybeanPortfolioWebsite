@@ -773,6 +773,8 @@ export const defaultPortfolio: PortfolioData = {
       medium: "image",
       image:
         "/portfolio/illustrations/resonance-of-ice-stalactites-not-final.webp",
+      width: 1600,
+      height: 900,
       alt: "Resonance of Ice Stalactites",
       featured: false,
       sortOrder: 32,
