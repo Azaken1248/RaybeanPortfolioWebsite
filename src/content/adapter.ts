@@ -102,6 +102,7 @@ export function mapApiToPortfolio(
 
     contact: {
       section: raw.contactContent.section,
+      buttonLabel: raw.contactContent.buttonLabel,
       methods: raw.contactContent.methods.map((method) => ({ ...method })),
       form: raw.contactContent.form,
     },

@@ -1064,6 +1064,7 @@ export const defaultPortfolio: PortfolioData = {
 
   contact: {
     section: { title: "Contact Me!" },
+    buttonLabel: "contact me!",
     methods: [
       {
         id: "discord",

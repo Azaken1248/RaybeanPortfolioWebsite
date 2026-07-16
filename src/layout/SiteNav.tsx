@@ -6,7 +6,7 @@ import { usePortfolio } from "../content/usePortfolio"
 import { useContactModal } from "./contactModalContext"
 
 export function SiteNav() {
-  const { nav, site } = usePortfolio()
+  const { nav, site, contact } = usePortfolio()
   const { open: openContact } = useContactModal()
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -70,7 +70,7 @@ export function SiteNav() {
           onClick={openContact}
           className="font-display shrink-0 cursor-pointer rounded-full bg-ink px-4 py-2.5 text-sm font-bold whitespace-nowrap text-bg shadow-nav transition hover:scale-[1.03] sm:px-7 sm:py-4 sm:text-base"
         >
-          contact me!
+          {contact.buttonLabel}
         </button>
       </div>
 

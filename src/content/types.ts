@@ -192,6 +192,8 @@ export type ContactFormField = {
 
 export type ContactContent = {
   section: SectionContent
+  /** The dark nav button's label. */
+  buttonLabel: string
   methods: ContactMethod[]
   /**
    * RESERVED — absent today. The contact form belongs to the message-bot phase.

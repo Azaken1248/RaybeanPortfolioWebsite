@@ -155,6 +155,7 @@ export type ApiPortfolioResponse = {
     commissionTiers: ApiCommissionTier[]
     contactContent: {
       section: SectionContent
+      buttonLabel: string
       methods: ApiContactMethod[]
       form?: {
         fields: ContactFormField[]
