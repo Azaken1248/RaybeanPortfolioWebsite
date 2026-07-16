@@ -46,6 +46,8 @@ export type ApiSocialLink = {
   handle?: string
   url?: string
   icon: string
+  /** Brand tint for the icon. Without it the row renders neutral grey. */
+  color?: string
   showInHero: boolean
   showInFooter: boolean
   showInContact: boolean
@@ -59,11 +61,18 @@ export type ApiCtaButton = {
   external?: boolean
 }
 
+export type ApiImageCredit = {
+  text: string
+  note?: string
+  href?: string
+}
+
 export type ApiHeroContent = {
   greeting: string
   intro: string[]
   imageUrl: string
   imageAlt: string
+  imageCredit?: ApiImageCredit
   ctaButtons: ApiCtaButton[]
 }
 
@@ -93,6 +102,9 @@ export type ApiWork = Timestamped & {
   description?: string
   /** Cloudinary URL once uploads exist. */
   imageUrl: string
+  /** Natural pixel dimensions; the masonry needs them to keep portraits portrait. */
+  width?: number
+  height?: number
   altText: string
   href?: string
   embedUrl?: string
