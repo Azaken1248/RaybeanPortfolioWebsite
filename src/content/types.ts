@@ -58,6 +58,8 @@ export type NavItem = {
   id: string
   label: string
   to: string
+  /** Optional. Renders before the label; omit for a text-only link. */
+  icon?: string
 }
 
 export type CtaButton = {
@@ -114,6 +116,8 @@ export type DisciplinePage = {
   id: DisciplineId
   route: string
   navLabel: string
+  /** Optional. Shown on the home page's discipline cards. */
+  icon?: string
   section: SectionContent
   /** e.g. "I mainly use Adobe Photoshop, Figma and Affinity..." */
   toolsNote?: string

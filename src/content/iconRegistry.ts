@@ -57,6 +57,50 @@ const phosphor: Record<string, Icon> = {
   YoutubeLogo: YoutubeLogoIcon,
 }
 
+/**
+ * Icon names carry their source as a prefix, so the admin can pick from several
+ * sets and this resolves them without knowing the picker exists:
+ *
+ *   phosphor:House   a Phosphor glyph (bundled)
+ *   simple:discord   a Simple Icons brand mark, fetched from their CDN
+ *   sprite:osu       a symbol from public/icons.svg
+ *   https://…        any image URL
+ *   House            legacy unprefixed, treated as Phosphor
+ */
+export type IconSource = "phosphor" | "simple" | "sprite" | "url"
+
+export function parseIconName(name: string): { source: IconSource; id: string } {
+  if (isUrl(name)) return { source: "url", id: name }
+  const idx = name.indexOf(":")
+  if (idx > 0) {
+    const prefix = name.slice(0, idx)
+    if (prefix === "phosphor" || prefix === "simple" || prefix === "sprite") {
+      return { source: prefix, id: name.slice(idx + 1) }
+    }
+  }
+  return { source: "phosphor", id: name }
+}
+
+export function isUrl(name: string): boolean {
+  return (
+    name.startsWith("http://") ||
+    name.startsWith("https://") ||
+    name.startsWith("blob:") ||
+    name.startsWith("data:")
+  )
+}
+
+/**
+ * Simple Icons ships 3,449 marks. Bundling the package to look one up by a
+ * runtime slug would defeat tree-shaking and drag megabytes into a portfolio,
+ * so brand marks come from their CDN instead — cached, colourable, and costing
+ * the bundle nothing.
+ */
+export function simpleIconUrl(slug: string, color?: string): string {
+  const tint = color?.replace("#", "")
+  return `https://cdn.simpleicons.org/${slug}${tint ? `/${tint}` : ""}`
+}
+
 /** Symbol ids present in public/icons.svg. */
 const sprite = new Set([
   "discord",

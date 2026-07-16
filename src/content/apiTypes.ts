@@ -38,6 +38,7 @@ export type ApiNavItem = {
   id: string
   label: string
   to: string
+  icon?: string
 }
 
 export type ApiSocialLink = {
@@ -86,6 +87,7 @@ export type ApiDiscipline = Timestamped & {
   id: DisciplineId
   route: string
   navLabel: string
+  icon?: string
   section: SectionContent
   toolsNote?: string
   groups: ApiWorkGroup[]

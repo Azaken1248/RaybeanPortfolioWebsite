@@ -40,6 +40,13 @@ export function SiteNav() {
                 >
                   {({ isActive }) => (
                     <>
+                      {item.icon && (
+                        <Icon
+                          name={item.icon}
+                          size={15}
+                          className="mr-1.5 inline-block align-[-2px]"
+                        />
+                      )}
                       {item.label}
                       {isActive && (
                         <motion.span
@@ -100,6 +107,13 @@ export function SiteNav() {
                       ].join(" ")
                     }
                   >
+                    {item.icon && (
+                      <Icon
+                        name={item.icon}
+                        size={15}
+                        className="mr-2 inline-block align-[-2px]"
+                      />
+                    )}
                     {item.label}
                   </NavLink>
                 </li>

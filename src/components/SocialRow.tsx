@@ -56,7 +56,7 @@ export function SocialRow({
                 style={style}
                 className={className}
               >
-                <Icon name={social.icon} size={icon} />
+                <Icon name={social.icon} size={icon} color={social.color} />
               </a>
             ) : (
               <button
@@ -67,7 +67,7 @@ export function SocialRow({
                 style={style}
                 className={`${className} cursor-pointer`}
               >
-                <Icon name={social.icon} size={icon} />
+                <Icon name={social.icon} size={icon} color={social.color} />
               </button>
             )}
           </li>

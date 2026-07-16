@@ -18,6 +18,7 @@ export function mapApiToPortfolio(
       id: discipline.id,
       route: discipline.route,
       navLabel: discipline.navLabel,
+      icon: discipline.icon,
       section: discipline.section,
       toolsNote: discipline.toolsNote,
       groups: discipline.groups.map((group) => ({
@@ -34,6 +35,7 @@ export function mapApiToPortfolio(
       id: item.id,
       label: item.label,
       to: item.to,
+      icon: item.icon,
     })),
 
     socials: raw.socials.map((social) => ({

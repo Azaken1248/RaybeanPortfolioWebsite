@@ -148,7 +148,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                           method.color ? brandedIcon : "bg-ink text-bg"
                         }`}
                       >
-                        <Icon name={method.icon} size={20} />
+                        <Icon name={method.icon} size={20} color={method.color} />
                       </span>
 
                       <div className="min-w-0 flex-1">
@@ -217,7 +217,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                             : "bg-lavender/30 text-ink hover:bg-ink hover:text-bg"
                         }`}
                       >
-                        <Icon name={social.icon} size={20} />
+                        <Icon name={social.icon} size={20} color={social.color} />
                       </a>
                     </li>
                   ))}
